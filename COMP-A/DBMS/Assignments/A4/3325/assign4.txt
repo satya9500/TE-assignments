@@ -1,0 +1,242 @@
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.20 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| assignment2        |
+| assignment3        |
+| employee           |
+| information_schema |
+| movies             |
+| mysql              |
+| performance_schema |
+| practice           |
+| sys                |
++--------------------+
+9 rows in set (0.02 sec)
+
+mysql> use movies;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_movies |
++------------------+
+| actor            |
+| direct           |
+| director         |
+| movie            |
+| moviecast        |
++------------------+
+5 rows in set (0.01 sec)
+
+mysql> select * from actor;
++-----+---------+--------+--------+
+| aid | f_name  | l_name | salary |
++-----+---------+--------+--------+
+| A1  | f_name1 | l_name |  20000 |
+| A2  | f_name2 | l_name |  40000 |
+| A3  | f_name3 | l_name |  60000 |
+| A4  | f_name4 | l_name |  90000 |
+| A5  | f_name5 | l_name |  50000 |
++-----+---------+--------+--------+
+5 rows in set (0.01 sec)
+
+mysql> select * from director;
++-----+--------+-------+--------+
+| did | fname  | lname | gender |
++-----+--------+-------+--------+
+| D1  | fname1 | lname | M      |
+| D2  | fname2 | lname | F      |
+| D3  | fname3 | lname | M      |
+| D4  | fname4 | lname | F      |
+| D5  | fname5 | lname | M      |
++-----+--------+-------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from movie;
++-----+------------+-------+--------+--------+
+| mid | rdate      | mrank | budget | title  |
++-----+------------+-------+--------+--------+
+| M1  | 2020-01-01 | A     |  10000 | title1 |
+| M2  | 2020-01-02 | B     |  20000 | title2 |
+| M3  | 2020-01-03 | C     |  30000 | title3 |
+| M4  | 2020-01-04 | A     |  40000 | title4 |
+| M5  | 2020-01-05 | D     |  50000 | title5 |
++-----+------------+-------+--------+--------+
+5 rows in set (0.01 sec)
+
+mysql> select * from direct;
++------+------+
+| mid  | did  |
++------+------+
+| M1   | D1   |
+| M2   | D2   |
+| M3   | D3   |
+| M4   | D4   |
+| M5   | D5   |
++------+------+
+5 rows in set (0.01 sec)
+
+mysql> select * from moviecast;
++------+------+-------+
+| mid  | aid  | role  |
++------+------+-------+
+| M1   | A1   | role1 |
+| M1   | A2   | role2 |
+| M2   | A3   | role1 |
+| M3   | A3   | role3 |
+| M4   | A4   | role4 |
+| M5   | A5   | role  |
++------+------+-------+
+6 rows in set (0.01 sec)
+
+mysql> select a.f_name, a.l_name, m.title from actor a natural join moviecast inner join movie m on moviecast.mid=m.mid where m.title IN('title1','title2');
++---------+--------+--------+
+| f_name  | l_name | title  |
++---------+--------+--------+
+| f_name1 | l_name | title1 |
+| f_name2 | l_name | title1 |
+| f_name3 | l_name | title2 |
++---------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select m.title, d.fname, d.lname from movie m natural join direct inner join director d on d.did=direct.did where year(m.rdate)='2020' order by m.rdate desc limit 2;
++--------+--------+-------+
+| title  | fname  | lname |
++--------+--------+-------+
+| title5 | fname5 | lname |
+| title4 | fname4 | lname |
++--------+--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select count(c.aid) as actors, m.title from moviecast c inner join movie m on c.mid=m.mid group by m.mid;
++--------+--------+
+| actors | title  |
++--------+--------+
+|      2 | title1 |
+|      1 | title2 |
+|      1 | title3 |
+|      1 | title4 |
+|      1 | title5 |
++--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select c.role, a.f_name, a.l_name from actor a inner join moviecast c on c.aid=a.aid where a.salary>50000;
++-------+---------+--------+
+| role  | f_name  | l_name |
++-------+---------+--------+
+| role1 | f_name3 | l_name |
+| role3 | f_name3 | l_name |
+| role4 | f_name4 | l_name |
++-------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select m.title, m.rdate, m.mrank, d.fname, d.lname from movie m natural join direct inner join director d on direct.did=d.did where d.gender='F';
++--------+------------+-------+--------+-------+
+| title  | rdate      | mrank | fname  | lname |
++--------+------------+-------+--------+-------+
+| title2 | 2020-01-02 | B     | fname2 | lname |
+| title4 | 2020-01-04 | A     | fname4 | lname |
++--------+------------+-------+--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from movie natural join direct natural join director where director.fname='fname1';
++------+-----+------------+-------+--------+--------+--------+-------+--------+
+| did  | mid | rdate      | mrank | budget | title  | fname  | lname | gender |
++------+-----+------------+-------+--------+--------+--------+-------+--------+
+| D1   | M1  | 2020-01-01 | A     |  10000 | title1 | fname1 | lname | M      |
++------+-----+------------+-------+--------+--------+--------+-------+--------+
+1 row in set (0.00 sec)
+
+mysql> select a.aid, a.f_name, a.l_name, m.mid, m.title from actor a cross join movie m;
++-----+---------+--------+-----+--------+
+| aid | f_name  | l_name | mid | title  |
++-----+---------+--------+-----+--------+
+| A1  | f_name1 | l_name | M1  | title1 |
+| A2  | f_name2 | l_name | M1  | title1 |
+| A3  | f_name3 | l_name | M1  | title1 |
+| A4  | f_name4 | l_name | M1  | title1 |
+| A5  | f_name5 | l_name | M1  | title1 |
+| A1  | f_name1 | l_name | M2  | title2 |
+| A2  | f_name2 | l_name | M2  | title2 |
+| A3  | f_name3 | l_name | M2  | title2 |
+| A4  | f_name4 | l_name | M2  | title2 |
+| A5  | f_name5 | l_name | M2  | title2 |
+| A1  | f_name1 | l_name | M3  | title3 |
+| A2  | f_name2 | l_name | M3  | title3 |
+| A3  | f_name3 | l_name | M3  | title3 |
+| A4  | f_name4 | l_name | M3  | title3 |
+| A5  | f_name5 | l_name | M3  | title3 |
+| A1  | f_name1 | l_name | M4  | title4 |
+| A2  | f_name2 | l_name | M4  | title4 |
+| A3  | f_name3 | l_name | M4  | title4 |
+| A4  | f_name4 | l_name | M4  | title4 |
+| A5  | f_name5 | l_name | M4  | title4 |
+| A1  | f_name1 | l_name | M5  | title5 |
+| A2  | f_name2 | l_name | M5  | title5 |
+| A3  | f_name3 | l_name | M5  | title5 |
+| A4  | f_name4 | l_name | M5  | title5 |
+| A5  | f_name5 | l_name | M5  | title5 |
++-----+---------+--------+-----+--------+
+25 rows in set (0.00 sec)
+
+mysql> select a.aid, a.f_name, a.l_name, a.salary, movie.title from actor a left join moviecast on a.aid=moviecast.aid left join movie on moviecast.mid=movie.mid where not movie.title='title1';
++-----+---------+--------+--------+--------+
+| aid | f_name  | l_name | salary | title  |
++-----+---------+--------+--------+--------+
+| A3  | f_name3 | l_name |  60000 | title2 |
+| A3  | f_name3 | l_name |  60000 | title3 |
+| A4  | f_name4 | l_name |  90000 | title4 |
+| A5  | f_name5 | l_name |  50000 | title5 |
++-----+---------+--------+--------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from movie left join moviecast on movie.mid=moviecast.mid left join actor on moviecast.aid=actor.aid where not actor.f_name='f_name3';
++-----+------------+-------+--------+--------+------+------+-------+------+---------+--------+--------+
+| mid | rdate      | mrank | budget | title  | mid  | aid  | role  | aid  | f_name  | l_name | salary |
++-----+------------+-------+--------+--------+------+------+-------+------+---------+--------+--------+
+| M1  | 2020-01-01 | A     |  10000 | title1 | M1   | A1   | role1 | A1   | f_name1 | l_name |  20000 |
+| M1  | 2020-01-01 | A     |  10000 | title1 | M1   | A2   | role2 | A2   | f_name2 | l_name |  40000 |
+| M4  | 2020-01-04 | A     |  40000 | title4 | M4   | A4   | role4 | A4   | f_name4 | l_name |  90000 |
+| M5  | 2020-01-05 | D     |  50000 | title5 | M5   | A5   | role  | A5   | f_name5 | l_name |  50000 |
++-----+------------+-------+--------+--------+------+------+-------+------+---------+--------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from movie left join moviecast on movie.mid=moviecast.mid left join actor on moviecast.aid=actor.aid where not actor.f_name='f_name3';
++-----+------------+-------+--------+--------+------+------+-------+------+---------+--------+--------+
+| mid | rdate      | mrank | budget | title  | mid  | aid  | role  | aid  | f_name  | l_name | salary |
++-----+------------+-------+--------+--------+------+------+-------+------+---------+--------+--------+
+| M1  | 2020-01-01 | A     |  10000 | title1 | M1   | A1   | role1 | A1   | f_name1 | l_name |  20000 |
+| M1  | 2020-01-01 | A     |  10000 | title1 | M1   | A2   | role2 | A2   | f_name2 | l_name |  40000 |
+| M4  | 2020-01-04 | A     |  40000 | title4 | M4   | A4   | role4 | A4   | f_name4 | l_name |  90000 |
+| M5  | 2020-01-05 | D     |  50000 | title5 | M5   | A5   | role  | A5   | f_name5 | l_name |  50000 |
++-----+------------+-------+--------+--------+------+------+-------+------+---------+--------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from movie left join moviecast on movie.mid=moviecast.mid left join actor on moviecast.aid=actor.aid where not actor.f_name='f_name3'
+    -> union
+    -> select * from movie left join moviecast on movie.mid=moviecast.mid left join actor on moviecast.aid=actor.aid where not movie.title='title1';
++-----+------------+-------+--------+--------+------+------+-------+------+---------+--------+--------+
+| mid | rdate      | mrank | budget | title  | mid  | aid  | role  | aid  | f_name  | l_name | salary |
++-----+------------+-------+--------+--------+------+------+-------+------+---------+--------+--------+
+| M1  | 2020-01-01 | A     |  10000 | title1 | M1   | A1   | role1 | A1   | f_name1 | l_name |  20000 |
+| M1  | 2020-01-01 | A     |  10000 | title1 | M1   | A2   | role2 | A2   | f_name2 | l_name |  40000 |
+| M4  | 2020-01-04 | A     |  40000 | title4 | M4   | A4   | role4 | A4   | f_name4 | l_name |  90000 |
+| M5  | 2020-01-05 | D     |  50000 | title5 | M5   | A5   | role  | A5   | f_name5 | l_name |  50000 |
+| M2  | 2020-01-02 | B     |  20000 | title2 | M2   | A3   | role1 | A3   | f_name3 | l_name |  60000 |
+| M3  | 2020-01-03 | C     |  30000 | title3 | M3   | A3   | role3 | A3   | f_name3 | l_name |  60000 |
++-----+------------+-------+--------+--------+------+------+-------+------+---------+--------+--------+
+6 rows in set (0.00 sec)
+
+mysql>
