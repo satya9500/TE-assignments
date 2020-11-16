@@ -1,0 +1,86 @@
+> use assig10;                                                                                                                        
+switched to db assig10                                                                                                                
+>                                                                                                                                     
+>                                                                                                                                     
+> db.student.insert({name : })                                                                                                        
+uncaught exception: SyntaxError: expected expression, got '}' :                                                                       
+@(shell):1:26                                                                                                                         
+> db.student.insert({name : "himanshu" , city : "mumbai" , branch : "comp" , cgpa : 9.34});                                           
+WriteResult({ "nInserted" : 1 })                                                                                                      
+> db.student.insert({name : "Ram" , city : "pune" , branch : "comp" , cgpa : 8.26});                                                  
+WriteResult({ "nInserted" : 1 })                                                                                                      
+> db.student.insert({name : "Sita" , city : "Mirzapur" , branch : "IT" , cgpa : 8.55});                                               
+WriteResult({ "nInserted" : 1 })                                                                                                      
+>                                                                                                                                     
+>                                                                                                                                     
+> db.student.find();                                                                                                                  
+{ "_id" : ObjectId("5fab3c401de6eff5d1f22cb2"), "name" : "himanshu", "city" : "mumbai", "branch" : "comp", "cgpa" : 9.34 }            
+{ "_id" : ObjectId("5fab3c761de6eff5d1f22cb3"), "name" : "Ram", "city" : "pune", "branch" : "comp", "cgpa" : 8.26 }                   
+{ "_id" : ObjectId("5fab3c9e1de6eff5d1f22cb4"), "name" : "Sita", "city" : "Mirzapur", "branch" : "IT", "cgpa" : 8.55 }                
+>                                                                                                                                     
+>                                                                                                                                     
+>                                                                                                                                     
+>                                                                                                                                     
+> db.student.update({name : {$eq : "Ram"}} , {$set : {marks : 80}})                                                                   
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })                                                                     
+> db.student.find();                                                                                                                  
+{ "_id" : ObjectId("5fab3c401de6eff5d1f22cb2"), "name" : "himanshu", "city" : "mumbai", "branch" : "comp", "cgpa" : 9.34 }            
+{ "_id" : ObjectId("5fab3c761de6eff5d1f22cb3"), "name" : "Ram", "city" : "pune", "branch" : "comp", "cgpa" : 8.26, "marks" : 80 }     
+{ "_id" : ObjectId("5fab3c9e1de6eff5d1f22cb4"), "name" : "Sita", "city" : "Mirzapur", "branch" : "IT", "cgpa" : 8.55 }                
+>                                                                                                                                     
+> db.student.update({name : {$eq : "Ram"}} , {$set : {marks : 90}})                                                                  
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })                                                                     
+> db.student.find();                                                                                                                  
+{ "_id" : ObjectId("5fab3c401de6eff5d1f22cb2"), "name" : "himanshu", "city" : "mumbai", "branch" : "comp", "cgpa" : 9.34 }            
+{ "_id" : ObjectId("5fab3c761de6eff5d1f22cb3"), "name" : "Ram", "city" : "pune", "branch" : "comp", "cgpa" : 8.26, "marks" : 90 }     
+{ "_id" : ObjectId("5fab3c9e1de6eff5d1f22cb4"), "name" : "Sita", "city" : "Mirzapur", "branch" : "IT", "cgpa" : 8.55 }                
+>                                                                                                                                     
+>                                                                                                                                     
+> db.student.find({$or : [{cgpa : {$gte : 9}} , {branch : {$eq : "comp"}}]})                                                          
+{ "_id" : ObjectId("5fab3c401de6eff5d1f22cb2"), "name" : "himanshu", "city" : "mumbai", "branch" : "comp", "cgpa" : 9.34 }            
+{ "_id" : ObjectId("5fab3c761de6eff5d1f22cb3"), "name" : "Ram", "city" : "pune", "branch" : "comp", "cgpa" : 8.26, "marks" : 90 }     
+>                                                                                                                                     
+>                                                                                                                                     
+> db.student.find({branch : {$ne : "IT"}})                                                                                            
+{ "_id" : ObjectId("5fab3c401de6eff5d1f22cb2"), "name" : "himanshu", "city" : "mumbai", "branch" : "comp", "cgpa" : 9.34 }            
+{ "_id" : ObjectId("5fab3c761de6eff5d1f22cb3"), "name" : "Ram", "city" : "pune", "branch" : "comp", "cgpa" : 8.26, "marks" : 90 }     
+>                                                                                                                                     
+>                                                                                                                                     
+> db.student.find({$or : [{cgpa : {$gte : 7}} , {branch : {$eq : "mumbai"}}]})                                                        
+{ "_id" : ObjectId("5fab3c401de6eff5d1f22cb2"), "name" : "himanshu", "city" : "mumbai", "branch" : "comp", "cgpa" : 9.34 }            
+{ "_id" : ObjectId("5fab3c761de6eff5d1f22cb3"), "name" : "Ram", "city" : "pune", "branch" : "comp", "cgpa" : 8.26, "marks" : 90 }     
+{ "_id" : ObjectId("5fab3c9e1de6eff5d1f22cb4"), "name" : "Sita", "city" : "Mirzapur", "branch" : "IT", "cgpa" : 8.55 }                
+>                                                                                                                                     
+>                                                                                                                                     
+> db.student.find({$or : [{cgpa : {$gte : 9.5}} , {branch : {$eq : "mumbai"}}]})                                                      
+>                                                                                                                                     
+>                                                                                                                                     
+> db.student.find({$or : [{cgpa : {$gte : 9.5}} , {city : {$eq : "mumbai"}}]})                                                        
+{ "_id" : ObjectId("5fab3c401de6eff5d1f22cb2"), "name" : "himanshu", "city" : "mumbai", "branch" : "comp", "cgpa" : 9.34 }            
+>                                                                                                                                     
+>                                                                                                                                     
+> db.student.find({$or : [{cgpa : {$lt : 9}} , {branch : {$ne : "comp"}}]})                                                           
+{ "_id" : ObjectId("5fab3c761de6eff5d1f22cb3"), "name" : "Ram", "city" : "pune", "branch" : "comp", "cgpa" : 8.26, "marks" : 90 }     
+{ "_id" : ObjectId("5fab3c9e1de6eff5d1f22cb4"), "name" : "Sita", "city" : "Mirzapur", "branch" : "IT", "cgpa" : 8.55 }                
+>                                                                                                                                     
+>                                                                                                                                     
+> db.student.save({name : "Navjeet" , cgpa : 10})                                                                                     
+WriteResult({ "nInserted" : 1 })                                                                                                      
+>                                                                                                                                     
+>                                                                                                                                     
+> db.student.find()                                                                                                                   
+{ "_id" : ObjectId("5fab3c401de6eff5d1f22cb2"), "name" : "himanshu", "city" : "mumbai", "branch" : "comp", "cgpa" : 9.34 }            
+{ "_id" : ObjectId("5fab3c761de6eff5d1f22cb3"), "name" : "Ram", "city" : "pune", "branch" : "comp", "cgpa" : 8.26, "marks" : 90 }     
+{ "_id" : ObjectId("5fab3c9e1de6eff5d1f22cb4"), "name" : "Sita", "city" : "Mirzapur", "branch" : "IT", "cgpa" : 8.55 }                
+{ "_id" : ObjectId("5fab40721de6eff5d1f22cb5"), "name" : "Navjeet", "cgpa" : 10 }                                                     
+>                                                                                                                                     
+>                                                                                                                                     
+> db.student.remove({name : {$eq : "Sita"}})                                                                                          
+WriteResult({ "nRemoved" : 1 })                                                                                                       
+>                                                                                                                                     
+>                                                                                                                                     
+> db.student.find()                                                                                                                   
+{ "_id" : ObjectId("5fab3c401de6eff5d1f22cb2"), "name" : "himanshu", "city" : "mumbai", "branch" : "comp", "cgpa" : 9.34 }            
+{ "_id" : ObjectId("5fab3c761de6eff5d1f22cb3"), "name" : "Ram", "city" : "pune", "branch" : "comp", "cgpa" : 8.26, "marks" : 90 }     
+{ "_id" : ObjectId("5fab40721de6eff5d1f22cb5"), "name" : "Navjeet", "cgpa" : 10 }                                                     
+>     

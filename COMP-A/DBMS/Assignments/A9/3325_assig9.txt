@@ -1,0 +1,28 @@
+> use student
+switched to db student
+> db.student.insertMany([])
+{ "acknowledged" : true, "insertedIds" : [ ] }
+> db.student.insertMany([{name : "Himanshu" , class : "comp-A"} , {name : "Ajay" , class : "comp-A"} , {name : "Navjeet" , class : "comp-B"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("5fa1f5b9e3d0bce6105f1040"),
+                ObjectId("5fa1f5b9e3d0bce6105f1041"),
+                ObjectId("5fa1f5b9e3d0bce6105f1042")
+        ]
+}
+> db.student.find()
+{ "_id" : ObjectId("5fa1f5b9e3d0bce6105f1040"), "name" : "Himanshu", "class" : "comp-A" }
+{ "_id" : ObjectId("5fa1f5b9e3d0bce6105f1041"), "name" : "Ajay", "class" : "comp-A" }
+{ "_id" : ObjectId("5fa1f5b9e3d0bce6105f1042"), "name" : "Navjeet", "class" : "comp-B" }
+> db.student.remove({name : "Ajay"})
+WriteResult({ "nRemoved" : 1 })
+> db.student.find()
+{ "_id" : ObjectId("5fa1f5b9e3d0bce6105f1040"), "name" : "Himanshu", "class" : "comp-A" }
+{ "_id" : ObjectId("5fa1f5b9e3d0bce6105f1042"), "name" : "Navjeet", "class" : "comp-B" }
+> db.student.update({class : {$eq : "comp-B"}}, {$set : {name : "Pawan"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.student.find()
+{ "_id" : ObjectId("5fa1f5b9e3d0bce6105f1040"), "name" : "Himanshu", "class" : "comp-A" }
+{ "_id" : ObjectId("5fa1f5b9e3d0bce6105f1042"), "name" : "Pawan", "class" : "comp-B" }
+>
