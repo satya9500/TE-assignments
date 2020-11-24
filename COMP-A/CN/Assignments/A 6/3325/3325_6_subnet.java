@@ -182,6 +182,34 @@ class Subnet{
 		return s;
 	}
 	
+	public static String addOne(String s , int x){
+		int carry = 1;
+		
+		int z = 0 , i;
+		for(i = 0 ; i < 35 ; i++){
+			if(s.charAt(i) != '.')
+				z++;
+				
+			if(z == x)
+				break;
+		}
+		
+		while(i >= 0 && carry != 0){
+			if(s.charAt(i) != '.'){
+				if(s.charAt(i) == '1'){
+					s = s.substring(0 , i) + '0' + s.substring(i+1);
+				}
+				else{
+					s = s.substring(0 , i) + '1' + s.substring(i+1);
+					carry = 0;
+				}
+			}
+			i--;
+		}
+		
+		return s;
+	}
+	
 	public static void main(String []args){
 		Scanner read = new Scanner(System.in);
 
@@ -226,33 +254,43 @@ class Subnet{
 		String networkId = getNetworkId(binaryIp , mask);
 		System.out.println("\nNetwork ID : " + networkId);
 		
+		temp = "";
+		temp2 = "";
+		for(int j = 0 ; j < binaryIp.length() ; j++){
+			if(binaryIp.charAt(j) != ' ')
+				temp += binaryIp.charAt(j);
+			else
+				temp += '.';
+		}	
+		
+		String binaryFormIp;
+		
 		int count = 0;
 		for(int i = 0 ; i < subnetCnt ; i++){
 			System.out.println("-----------------------------------------------------------------");
 			System.out.println("\nGroup - " + ++count + " :");
 			
-			String noOfSubnet = intToBinary(i);
-			temp = "";
-			temp2 = "";
-			for(int j = 0 ; j < binaryIp.length() ; j++){
-				if(binaryIp.charAt(j) != ' ')
-					temp += binaryIp.charAt(j);
-				else
-					temp += '.';
-			}	
-				
-			int j = 7;
-			while(temp2.length() < reservedBits){
-				temp2 = noOfSubnet.charAt(j--)+ temp2;
+			//from
+			binaryFormIp = generate(temp , mask + reservedBits, temp2 , '0');
+			
+			int z = i;
+			while(z != 0){
+				binaryFormIp = addOne(binaryFormIp ,mask + reservedBits);
+				z--;
 			}
 			
-			//from
-			String binaryFormIp = generate(temp , mask + reservedBits, temp2 , '0');
 			System.out.println(binaryFormIp + "         " + binaryToInt(binaryFormIp));
 			System.out.println("                       TO                               ");
 			
 			//To
 			binaryFormIp = generate(temp , mask + reservedBits, temp2 , '1');
+			
+			z = i;
+			while(z != 0){
+				binaryFormIp = addOne(binaryFormIp ,mask + reservedBits);
+				z--;
+			}
+			
 			System.out.println(binaryFormIp + "         " + binaryToInt(binaryFormIp));
 		}
 		
