@@ -247,12 +247,12 @@ class Subnet{
 			}
 			
 			//from
-			String binaryFormIp = generate(temp , mask, temp2 , '0');
+			String binaryFormIp = generate(temp , mask + reservedBits, temp2 , '0');
 			System.out.println(binaryFormIp + "         " + binaryToInt(binaryFormIp));
 			System.out.println("                       TO                               ");
 			
 			//To
-			binaryFormIp = generate(temp , mask, temp2 , '1');
+			binaryFormIp = generate(temp , mask + reservedBits, temp2 , '1');
 			System.out.println(binaryFormIp + "         " + binaryToInt(binaryFormIp));
 		}
 		
