@@ -1,0 +1,176 @@
+> use student;
+switched to db student
+> db.student.insert({name : "student1" , rollno : 1 , prn : 1753 , dbms : 85 , toc : 86 , branch : "comp"});
+WriteResult({ "nInserted" : 1 })
+> db.student.insert({name : "student2" , rollno : 5 , prn : 1785 , dbms : 88 , toc : 80 , branch : "IT"});
+WriteResult({ "nInserted" : 1 })
+> db.student.insert({name : "student3" , rollno : 8 , prn : 1854 , dbms : 90 , toc : 85 , branch : "comp"});
+WriteResult({ "nInserted" : 1 })
+> db.student.insert({name : "student4" , rollno : 6 , prn : 4625 , dbms : 75 , toc : 66 , branch : "mech"});
+WriteResult({ "nInserted" : 1 })
+> db.student.insert({name : "student5" , rollno : 12 , prn : 6875 , dbms : 92 , toc : 86 , branch : "entc"});
+WriteResult({ "nInserted" : 1 })
+> db.student.insert({name : "student6" , rollno : 22 , prn : 4824 , dbms : 82 , toc : 98 , branch : "IT"});
+WriteResult({ "nInserted" : 1 })
+> db.student.insert({name : "student7" , rollno : 14 , prn : 7254 , dbms : 85 , toc : 96 , branch : "entc"});
+WriteResult({ "nInserted" : 1 })
+> 
+> 
+> 
+> db.student.find();
+{ "_id" : ObjectId("5fbdf2e3fd9edd5af495f448"), "name" : "student1", "rollno" : 1, "prn" : 1753, "dbms" : 85, "toc" : 86, "branch" : "comp" }
+{ "_id" : ObjectId("5fbdf32bfd9edd5af495f449"), "name" : "student2", "rollno" : 5, "prn" : 1785, "dbms" : 88, "toc" : 80, "branch" : "IT" }
+{ "_id" : ObjectId("5fbdf340fd9edd5af495f44a"), "name" : "student3", "rollno" : 8, "prn" : 1854, "dbms" : 90, "toc" : 85, "branch" : "comp" }
+{ "_id" : ObjectId("5fbdf355fd9edd5af495f44b"), "name" : "student4", "rollno" : 6, "prn" : 4625, "dbms" : 75, "toc" : 66, "branch" : "mech" }
+{ "_id" : ObjectId("5fbdf367fd9edd5af495f44c"), "name" : "student5", "rollno" : 12, "prn" : 6875, "dbms" : 92, "toc" : 86, "branch" : "entc" }
+{ "_id" : ObjectId("5fbdf37efd9edd5af495f44d"), "name" : "student6", "rollno" : 22, "prn" : 4824, "dbms" : 82, "toc" : 98, "branch" : "IT" }
+{ "_id" : ObjectId("5fbdf3a5fd9edd5af495f44e"), "name" : "student7", "rollno" : 14, "prn" : 7254, "dbms" : 85, "toc" : 96, "branch" : "entc" }
+> 
+> 
+> 
+> 
+> 
+> db.student.aggregate([{$group : {_id : '$branch' , count : {$sum : 1}}}]);
+{ "_id" : "entc", "count" : 2 }
+{ "_id" : "mech", "count" : 1 }
+{ "_id" : "IT", "count" : 2 }
+{ "_id" : "comp", "count" : 2 }
+> 
+> 
+> 
+>  
+> db.student.aggregate([{$group : {_id : "$branch" , marks : {$max : {$sum : ["$dbms" , "$toc"]}}}}]);
+{ "_id" : "entc", "marks" : 181 }
+{ "_id" : "mech", "marks" : 141 }
+{ "_id" : "IT", "marks" : 180 }
+{ "_id" : "comp", "marks" : 175 }
+> 
+> 
+> 
+> 
+> 
+> db.student.find().sort({"dbms" : -1}).limit(1);
+{ "_id" : ObjectId("5fbdf367fd9edd5af495f44c"), "name" : "student5", "rollno" : 12, "prn" : 6875, "dbms" : 92, "toc" : 86, "branch" : "entc" }
+> 
+> 
+> 
+> 
+> 
+> db.student.find().sort({"toc" : -1}).limit(1);
+{ "_id" : ObjectId("5fbdf37efd9edd5af495f44d"), "name" : "student6", "rollno" : 22, "prn" : 4824, "dbms" : 82, "toc" : 98, "branch" : "IT" }
+> 
+> 
+> 
+> 
+> 
+> 
+> db.student.aggregate([{$group : {_id : null , dbms_AVG : {$avg : "$dbms"}}}]);
+{ "_id" : null, "dbms_AVG" : 85.25 }
+> 
+> db.student.aggregate([{$group : {_id : null , toc_AVG : {$avg : "$toc"}}}]);
+{ "_id" : null, "toc_AVG" : 80.875 }
+> 
+> 
+> 
+> 
+> 
+> db.student.find().sort({"toc" : 1}).limit(1);
+{ "_id" : ObjectId("5fbe05c76afe7fa64bcac84e"), "name" : "student8", "rollno" : 45, "prn" : 1456, "dbms" : 85, "toc" : 50, "branch" : "comp" }
+> 
+> 
+> 
+> 
+> 
+> db.student.createIndex({rollno : 1});
+{
+	"createdCollectionAutomatically" : false,
+	"numIndexesBefore" : 1,
+	"numIndexesAfter" : 2,
+	"ok" : 1
+}
+> 
+> db.student.getIndexes();
+[
+	{
+		"v" : 2,
+		"key" : {
+			"_id" : 1
+		},
+		"name" : "_id_",
+		"ns" : "student.student"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"rollno" : 1
+		},
+		"name" : "rollno_1",
+		"ns" : "student.student"
+	}
+]
+> db.student.createIndex({prn : 1});
+{
+	"createdCollectionAutomatically" : false,
+	"numIndexesBefore" : 2,
+	"numIndexesAfter" : 3,
+	"ok" : 1
+}
+> db.student.getIndexes();
+[
+	{
+		"v" : 2,
+		"key" : {
+			"_id" : 1
+		},
+		"name" : "_id_",
+		"ns" : "student.student"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"rollno" : 1
+		},
+		"name" : "rollno_1",
+		"ns" : "student.student"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"prn" : 1
+		},
+		"name" : "prn_1",
+		"ns" : "student.student"
+	}
+]
+> 
+> 
+> 
+>
+> 
+> db.student.dropIndex({rollno : 1});
+{ "nIndexesWas" : 3, "ok" : 1 }
+> 
+> 
+> db.student.getIndexes();
+[
+	{
+		"v" : 2,
+		"key" : {
+			"_id" : 1
+		},
+		"name" : "_id_",
+		"ns" : "student.student"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"prn" : 1
+		},
+		"name" : "prn_1",
+		"ns" : "student.student"
+	}
+]
+> 
+
+
+
