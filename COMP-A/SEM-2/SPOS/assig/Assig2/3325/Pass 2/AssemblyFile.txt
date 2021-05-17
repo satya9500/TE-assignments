@@ -1,0 +1,17 @@
+			START		200
+			MOVER		AREG, ='2'
+Lable		MOVER		BREG, ='4'
+			MOVEM		BREG, A
+Lable1		ADD			AREG, A
+			MOVEM		AREG, B
+			ORIGIN		Lable + 1
+			LTORG		
+			PRINT		B
+			MOVER		AREG,='2'
+			MOVER		BREG,='7'
+Lable1		EQU			Lable
+			SUB			BREG, A
+			PRINT		A
+A			DS			2
+B			DS			3
+			END

@@ -83,6 +83,11 @@ class AFH {
 					}
 				}
 				
+				if(ans[1].equals("DC") || ans[1].equals("DS") || ans[1].equals("EQU")){
+					ans[2] = ans[0] + " , " + ans[2];
+					ans[0] = "";	
+				}
+				
 				System.out.println(String.format("%-20s  |  %-20s  |  %-20s", ans[0], ans[1], ans[2]));
 				System.out.println("------------------------------------------------------------------------------\n");
 			}
