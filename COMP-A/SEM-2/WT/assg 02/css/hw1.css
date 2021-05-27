@@ -1,0 +1,97 @@
+body{
+  padding:10px;
+  margin:10px;
+}
+header{
+  background-image:url("images/flywheel.jpg");
+  background-size:cover;
+  padding: 35px;
+}
+h1{
+  color:white;
+  text-transform:uppercase;
+  text-align:center;
+  font-size:25px;
+  margin-bottom:5px;
+  margin-top: 0px;
+  line-height:5px;
+  font-weight: bolder;
+}
+nav{
+  padding:5px 10px 15px 10px;
+  overflow:auto;
+}
+nav a{
+  float:left;
+  text-decoration:none;
+  background-color:rgb(256,256,256,0.30);
+  color:black;
+  width:200px;
+  padding: 15px 20px;
+  border-radius:4px;
+  margin:25px;
+  text-align:center;
+  font-weight: bold;
+}
+.active{
+  background-color:rgb(256,256,256);
+  font-weight: bold;
+  color:#551A8B;
+}
+main img{
+  width:200px;
+  height:100px;
+  border: 2px solid black;
+  display: block;
+  margin: 30px;
+}
+aside{
+  float:left;
+  background-color:rgb(100,100,0);
+  margin-right:5px;
+  height:50vmax;
+}
+
+main{
+  display:inline;
+}
+table{
+  font-family:arial;
+  margin: 0 auto;
+  width:60vw;
+
+}
+table th{
+  color:white;
+  background-color:rgb(107,142,35,0.8);
+  font-weight:bold;
+  padding:15px;
+  font-size:15px;
+  border-bottom: 2px solid rgb(173,255,47,0.5);
+}
+table th:first-child{
+  text-align:left;
+  border-radius:3px 0px 0px 0px;
+}
+table th:last-child{
+  border-radius:0px 3px 0px 0px;
+}
+table tr td:first-child{
+  text-align:left;
+}
+table tr td{
+  text-align:center;
+}
+td{
+  padding:15px;
+  background-color:rgb(192,192,192,0.4);
+  font-size:15px;
+  font-weight:bold;
+  color:rgb(105,105,105);
+}
+h2{
+  font-size: 32px;
+}
+section p{
+  font-size: 20px;
+}

@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+body{
+    background-color: rgb(167, 204, 235);
+}
+
+.container{
+    text-align: center;
+    margin: auto;
+    margin-top: 230px;
+}
+
+table{
+    font-size: 30px;
+    margin-bottom: 60px;
+}
+
+tr{
+    margin-bottom: 60px;
+}
+
+input{
+    width: 300px;
+    height: 25px;
+}
+
+button{
+    font-size: 20px;
+    width: 150px;
+    height: 45px;
+}
+
+.registerLink{
+	font-size: 20px;
+	margin-top: 20px;
+	display: block;
+}

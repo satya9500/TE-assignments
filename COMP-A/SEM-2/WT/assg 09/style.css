@@ -1,0 +1,18 @@
+.container{
+    width: 100%;;
+    text-align: center;
+    margin-top: 15%;
+}
+
+.heading{
+    margin-bottom: 100px;
+}
+
+.tableContainer{
+    display: inline-block;
+    margin: auto;
+
+    border: 1px solid black;
+
+    background-color: #e6e6e6;
+}

@@ -1,0 +1,42 @@
+body{
+    background-color: rgb(238, 238, 167);
+}
+
+.heading{
+    margin-top: 130px;
+    text-align: center;
+    font-size: 50px;
+}
+
+.container{
+    text-align: center;
+    margin-top: 200px;
+    font-size: 30px;
+}
+
+input{
+    width: 250px;
+    height: 20px;
+}
+
+select{
+    width: 250px;
+    height: 20px;
+    font-size: 15px;
+}
+
+option{
+    font-size: large;
+}
+
+#ans1, #ans2{
+    width: auto;
+}
+
+button{
+    width: 150px;
+    height: 35px;
+    font-size: large;
+    margin: auto;
+    margin-top: 80px;
+}
