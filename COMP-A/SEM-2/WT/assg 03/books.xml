@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="style.css"?>
+
+<books>
+    <heading>BOOKS ASSIGNMENT No. 3</heading>
+    
+    <book>
+        <title>Title: 1</title>
+        <author>Author: 1</author>
+        <publish>Publisher: 1</publish>
+        <edition>Edition: 1</edition>
+        <price>Price: 450</price>
+        
+    </book>
+        
+    
+    <book>
+        <title>Title: 2</title>
+        <author>Author: 2</author>
+        <publish>Publishr: 2</publish>
+        <edition>Edition: 5</edition>
+        <price>Price: 500</price>
+    </book>
+        
+    
+    <book>
+        <title>Title: 3</title>
+        <author>Author: 3</author>
+        <publish>Publishr: 3</publish>
+        <edition>Edition: 8</edition>
+        <price>Price: 700</price>
+    </book>
+    
+    <book>
+        <title>Title: 4</title>
+        <author>Author: 4</author>
+        <publish>Publishr: 4</publish>
+        <edition>Edition: 6</edition>
+        <price>Price: 460</price>
+        
+    </book>
+    
+    <book>
+        <title>Title: 5</title>
+        <author>Author: 5</author>
+        <publish>Publish: 5</publish>
+        <edition>Edition: 2</edition>
+        <price>Price: 750</price>
+        
+    </book>
+    
+</books>

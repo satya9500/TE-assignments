@@ -1,0 +1,82 @@
+.database{
+    width: 100%;
+    text-align: center;
+}
+
+.database table{
+    text-align: center;
+    margin: auto;
+
+    border: 1px solid black;
+    background-color: rgb(231, 230, 230);
+}
+
+.database th, td{
+    padding: 10px;
+    border: 1px solid black;
+}
+
+hr{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.Register{
+    width: 100%;
+    text-align: center;
+}
+
+.Register table{
+    text-align: left;
+    margin:auto;
+
+    font-size: 20px;
+    border: none;
+}
+
+.Register td{
+    padding: 10px;
+    border: none;
+}
+
+input{
+    height: 25px;
+    width: 200px;
+    font-size: 16px;
+}
+
+.submit{
+    width: 100%;
+    text-align: center;
+}
+
+button{
+    margin-top: 30px;
+
+    border-radius: 3%;
+
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.msg{
+    color: blue;
+}
+
+.edit_btn{
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
+
+.del_btn{
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
