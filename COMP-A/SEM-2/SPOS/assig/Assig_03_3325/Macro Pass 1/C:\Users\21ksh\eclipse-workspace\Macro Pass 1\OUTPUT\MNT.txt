@@ -1,0 +1,7 @@
+name	EAVL
+#PP	3
+#KP	1
+#EV	2
+#MDTP	1
+#KPDTP	0
+#SSTP	0
